@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   Children,
@@ -9,9 +9,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { imagePaths } from "@/assets/images";
 import { useLocaleMessage } from "@/i18n";
 import type { LocaleMessageKey } from "@/i18n";
+import type { InsightChartVariant } from "@/components/charts/InsightHighchart";
 
 const metrics = [
   {
@@ -141,26 +141,54 @@ const insightCards = [
     titleKey: "home.insight.cards.election.title",
     value: "+38%",
     textKey: "home.insight.cards.election.text",
+    visual: "election",
   },
   {
     categoryKey: "home.insight.cards.media.category",
     titleKey: "home.insight.cards.media.title",
     value: "12h",
     textKey: "home.insight.cards.media.text",
+    visual: "media",
   },
   {
     categoryKey: "home.insight.cards.risk.category",
     titleKey: "home.insight.cards.risk.title",
     value: "4 nodes",
     textKey: "home.insight.cards.risk.text",
+    visual: "risk",
   },
 ] as const;
 
+const InsightHighchart = dynamic(
+  () =>
+    import("@/components/charts/InsightHighchart").then(
+      (mod) => mod.InsightHighchart,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full w-full animate-pulse bg-[linear-gradient(135deg,#001F5C,#0A327E)]" />
+    ),
+  },
+);
+
 const companyKeywords = [
-  "Trust",
-  "Real-time",
-  "Intelligence",
-  "Transparency",
+  {
+    label: "Trust",
+    textKey: "home.company.keywordTexts.trust",
+  },
+  {
+    label: "Real-time",
+    textKey: "home.company.keywordTexts.realTime",
+  },
+  {
+    label: "Intelligence",
+    textKey: "home.company.keywordTexts.intelligence",
+  },
+  {
+    label: "Transparency",
+    textKey: "home.company.keywordTexts.transparency",
+  },
 ] as const;
 
 function AnimatedNumber({
@@ -309,6 +337,14 @@ function MobileSnapSlider({
       </div>
     </div>
   );
+}
+
+function InsightVisual({
+  variant,
+}: {
+  variant: (typeof insightCards)[number]["visual"];
+}) {
+  return <InsightHighchart variant={variant as InsightChartVariant} />;
 }
 
 export default function HomePage() {
@@ -626,32 +662,12 @@ export default function HomePage() {
               key={card.titleKey}
               className="group min-w-[82vw] snap-start overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:min-w-0 md:rounded-[1.75rem]"
             >
-              <div className="relative h-40 overflow-hidden bg-brand-navy">
-                <Image
-                  src={imagePaths.dataFlow}
-                  alt={t(card.titleKey)}
-                  fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="object-cover opacity-35 grayscale transition duration-700 group-hover:scale-105 group-hover:opacity-45"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,31,92,0.88),rgba(0,31,92,0.28)),radial-gradient(circle_at_80%_20%,rgba(201,164,75,0.45),transparent_34%)]" />
-                <svg
-                  className="absolute inset-x-6 bottom-5 h-16 w-[calc(100%-3rem)]"
-                  viewBox="0 0 260 72"
-                  aria-hidden
-                >
-                  <path
-                    d="M0 56C34 46 44 20 78 31C111 42 119 16 152 23C190 31 203 8 260 13"
-                    fill="none"
-                    stroke="#C9A44B"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M0 56C34 46 44 20 78 31C111 42 119 16 152 23C190 31 203 8 260 13L260 72H0Z"
-                    fill="rgba(201,164,75,0.18)"
-                  />
-                </svg>
+              <div className="relative isolate h-40 overflow-hidden bg-brand-navy">
+                <div className="absolute inset-0 transition duration-700 group-hover:scale-[1.02] group-hover:saturate-110">
+                  <InsightVisual variant={card.visual} />
+                </div>
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_18%,rgba(201,164,75,0.22),transparent_32%)] opacity-70 transition duration-500 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute inset-x-8 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-gold/80 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
               </div>
               <div className="p-7">
                 <div className="flex items-center justify-between">
@@ -692,12 +708,12 @@ export default function HomePage() {
           </div>
           <div className="grid gap-px bg-white/10 p-px md:grid-cols-2">
             {companyKeywords.map((keyword) => (
-              <div key={keyword} className="bg-brand-navy p-6 sm:p-8">
+              <div key={keyword.label} className="bg-brand-navy p-6 sm:p-8">
                 <p className="heading text-2xl text-brand-gold sm:text-3xl">
-                  {keyword}
+                  {keyword.label}
                 </p>
                 <p className="mt-4 text-sm leading-7 text-white/60">
-                  {t("home.company.keywordText")}
+                  {t(keyword.textKey)}
                 </p>
               </div>
             ))}

@@ -1,8 +1,8 @@
 const en = {
   common: {
-    siteName: "Casa Política Intelligence",
-    brand: "Casa Política",
-    description: "Casa Política Intelligence",
+    siteName: "Casa Politica Intelligence",
+    brand: "Casa Politica Intelligence",
+    description: "Casa Politica Intelligence",
     rights: "All rights reserved.",
   },
   nav: {
@@ -16,15 +16,15 @@ const en = {
   home: {
     title: "Home",
     description:
-      "Casa Política platform for political and data intelligence.",
+      "Casa Politica Intelligence platform for political and data intelligence.",
     recentPosts: "Recent updates",
     hero: {
-      eyebrow: "Casa Politica – The Architecture of Power",
+      eyebrow: "Casa Politica Intelligence – The Architecture of Power",
       headlineLine1: "We do not poll public opinion.",
       headlineLine2: "We decode the flow of power.",
       description:
         "A real-time public sentiment engine without phone polling.",
-      primaryCta: "Request a Solution Demo",
+      primaryCta: "Contact Us",
       secondaryCta: "Explore the architecture",
     },
     dashboard: {
@@ -45,7 +45,7 @@ const en = {
       headers: {
         criteria: "Criteria",
         legacy: "Traditional polling",
-        casa: "Casa Politica",
+        casa: "Casa Politica Intelligence",
       },
       rows: {
         responseRate: {
@@ -112,7 +112,7 @@ const en = {
       eyebrow: "Core Technology",
       title: "Opinion structure analysis, not simple frequency counting",
       description:
-        "Mention volume is not enough. Casa Politica reads the structure behind opinion.",
+        "Mention volume is not enough. Casa Politica Intelligence reads the structure behind opinion.",
       cards: {
         nlp: {
           title: "NLP Sentiment Analysis",
@@ -159,22 +159,22 @@ const en = {
       eyebrow: "Insight",
       title: "Issue reports that prove the engine",
       description:
-        "Casa Politica turns the direction, velocity, and spread of political issues into actionable reports.",
+        "Casa Politica Intelligence turns the direction, velocity, and spread of political issues into actionable reports.",
       cards: {
         election: {
           category: "Election Pulse",
           title: "Policy keyword momentum",
-          text: "Transportation and housing keywords rose sharply in conversations among young voters in the metro area.",
+          text: "Mentions, sentiment, and regional response signals were combined to validate momentum among young voters in the metro area.",
         },
         media: {
           category: "Media Signal",
           title: "News frame shift detected",
-          text: "The engine detected when coverage moved from candidate personality issues to policy verification.",
+          text: "The engine identified the 12-hour window when coverage moved from candidate personality issues to policy verification.",
         },
         risk: {
           category: "Risk Radar",
           title: "Negative sentiment pathways",
-          text: "The spread path across communities, short-form channels, and local media was mapped.",
+          text: "Propagation nodes across communities, short-form channels, and local media were mapped to trace negative sentiment amplification.",
         },
       },
     },
@@ -183,26 +183,68 @@ const en = {
       title: "Trust is engineered through transparent data operations.",
       description:
         "We do not replace political judgment. We provide faster, verifiable evidence so campaigns, media, and investors can look at the same reality.",
-      keywordText:
-        "We clarify data sources, processing methods, and interpretation standards to deliver insights decision-makers can trust.",
+      keywordTexts: {
+        trust:
+          "We make the full path from collection to analysis transparent, providing objective evidence that stakeholders can trust.",
+        realTime:
+          "We reflect shifting public and market conditions immediately, delivering current data before the decision window closes.",
+        intelligence:
+          "We move beyond simple metrics, using advanced analytical models to surface strategic insight at the core of each issue.",
+        transparency:
+          "We reduce information asymmetry by opening the process, making data-driven decisions genuinely transparent.",
+      },
     },
     cta: {
       eyebrow: "Contact",
       title: "Connect real-time public intelligence to your team’s decisions.",
-      button: "Request a Solution Demo",
+      button: "Contact Us",
     },
     samplePost: {
-      title: "Welcome to Casa Política Intelligence",
+      title: "Welcome to Casa Politica Intelligence",
       excerpt:
         "The project structure is ready. Start adding features.",
     },
   },
   about: {
-    title: "About us",
+    eyebrow: "Company · Leadership",
+    title: "Casa Politica Intelligence",
+    subtitle:
+      "Casa Politica Intelligence is a political intelligence company that interprets the movement of power and public sentiment through real-time data.",
     paragraph1:
-      "Casa Política Intelligence is a platform that analyzes political and public data to deliver insights.",
+      "We move beyond phone and sample-based polling by combining behavioral data, language analysis, and issue propagation models. Our work helps politicians, parties, and institutions act on faster, verifiable evidence.",
     paragraph2:
-      "This page can include company overview, mission, team information, and more.",
+      "Our goal is to connect political language with data science and create a stronger standard for campaigns, policy, and crisis response.",
+    tags: {
+      strategy: "Political Strategy",
+      data: "AI Data",
+      trust: "Trusted Analysis",
+      infrastructure: "Infrastructure",
+    },
+    visualLabel: "Political Data Flow",
+    metrics: {
+      response: "Response-rate limit of legacy polling",
+      delay: "Days from survey design to publication",
+      realtime: "Real-time issue detection operations",
+    },
+    principles: {
+      observation: {
+        title: "From Ask People to Read Behavior",
+        text: "We read behavioral signals such as search, comments, mentions, and spread pathways instead of relying only on stated sample responses.",
+      },
+      infrastructure: {
+        title: "A data operating system for politics",
+        text: "We aim to build an operating infrastructure that connects collection, refinement, analysis, indexing, and dashboards.",
+      },
+      trust: {
+        title: "Principles for trusted analysis",
+        text: "We clarify data sources and processing standards while reducing bias and noise to produce evidence that can support strategic decisions.",
+      },
+    },
+    mission: {
+      eyebrow: "Mission",
+      title: "We do not simply replace polling. We change decision-making.",
+      text: "Casa Politica Intelligence does not exist to show more numbers. We interpret the direction, velocity, and reasons behind public sentiment so campaigns, policy teams, and crisis operators can act with a stronger standard of judgment.",
+    },
   },
   contact: {
     title: "Contact",
@@ -216,6 +258,10 @@ const en = {
       subjectPlaceholder: "Subject of your inquiry",
       message: "Message",
       submit: "Send message",
+      sending: "Sending...",
+      success: "Your message has been sent. We will get back to you soon.",
+      error:
+        "Failed to send your message. Please try again later or contact us by email.",
     },
   },
 };

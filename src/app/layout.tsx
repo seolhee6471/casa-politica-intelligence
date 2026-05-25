@@ -43,15 +43,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
-  title: "Casa Politica | AI Political Data Infrastructure",
+  title: "Casa Politica Intelligence | AI Political Data Infrastructure",
   description:
-    "We do not poll public opinion. Casa Politica decodes the flow of power with a real-time AI public sentiment engine.",
+    "We do not poll public opinion. Casa Politica Intelligence decodes the flow of power with a real-time AI public sentiment engine.",
   icons: {
     icon: "/favicon.ico",
     apple: "/icon.png",
   },
   openGraph: {
-    title: "Casa Politica | AI Political Data Infrastructure",
+    title: "Casa Politica Intelligence | AI Political Data Infrastructure",
     description:
       "We do not poll public opinion. We decode the flow of power with real-time political data intelligence.",
     type: "website",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Casa Politica | AI Political Data Infrastructure",
+    title: "Casa Politica Intelligence | AI Political Data Infrastructure",
     description:
       "A real-time AI public sentiment engine for political strategy.",
     images: ["/icon.png"],
