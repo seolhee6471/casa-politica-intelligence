@@ -39,10 +39,13 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://casa-politica-intelligence.vercel.app";
+const sharedImage = "/images/casa.jpg";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: new URL(siteUrl),
   title: "Casa Politica Intelligence | AI Political Data Infrastructure",
   description:
     "We do not poll public opinion. Casa Politica Intelligence decodes the flow of power with a real-time AI public sentiment engine.",
@@ -59,19 +62,19 @@ export const metadata: Metadata = {
     siteName: "Casa Politica Intelligence",
     images: [
       {
-        url: "/icon.png",
-        width: 512,
-        height: 512,
+        url: sharedImage,
+        width: 1024,
+        height: 1024,
         alt: "Casa Politica Intelligence",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Casa Politica Intelligence | AI Political Data Infrastructure",
     description:
       "A real-time AI public sentiment engine for political strategy.",
-    images: ["/icon.png"],
+    images: [sharedImage],
   },
 };
 

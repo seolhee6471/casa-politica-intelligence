@@ -4,8 +4,8 @@ import { useLocaleMessage } from "@/i18n/useLocaleMessage";
 import type { Locale } from "@/i18n/types";
 
 const options: { value: Locale; label: string }[] = [
-  { value: "kr", label: "KR" },
   { value: "en", label: "EN" },
+  { value: "kr", label: "KR" },
 ];
 
 export function LocaleSwitcher() {

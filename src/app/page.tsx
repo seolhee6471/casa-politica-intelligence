@@ -409,8 +409,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="pulse-dashboard group rounded-[1.5rem] border border-slate-200 bg-white p-3 shadow-[0_24px_80px_rgba(0,31,92,0.10)] sm:rounded-[2rem] sm:p-5">
-            <div className="rounded-[1.25rem] bg-brand-navy p-4 text-white sm:rounded-[1.5rem] sm:p-6">
+          <div className="pulse-dashboard group">
+            <div className="rounded-[1.5rem] bg-brand-navy p-4 text-white sm:rounded-[2rem] sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-white/50">
