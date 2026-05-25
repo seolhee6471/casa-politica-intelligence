@@ -74,6 +74,15 @@ li,
   letter-spacing: -0.01em;
 }
 
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection {
   background: color-mix(in srgb, var(--brand-gold) 28%, transparent);
   color: var(--brand-navy);

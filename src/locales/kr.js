@@ -40,7 +40,7 @@ const kr = {
     },
     painGain: {
       eyebrow: "Pain vs Gain",
-      title: "표본 조사의 한계를 실시간 데이터로 넘습니다",
+      title: "표본 조사의 한계를\n실시간 데이터로 넘습니다",
       description:
         "묻는 조사에서 읽는 데이터로. 속도, 비용, 대표성의 한계를 다시 설계합니다.",
       headers: {
@@ -78,7 +78,7 @@ const kr = {
     },
     solution: {
       eyebrow: "Solution",
-      title: "데이터 수집에서 대시보드까지 이어지는 AI 민심 엔진",
+      title: "데이터 수집에서 대시보드까지\n이어지는 AI 민심 엔진",
       description:
         "수집 → 정제 → 분석 → 지표화 → 대시보드. 복잡한 민심을 운영 가능한 5단계 흐름으로 바꿉니다.",
       steps: {
@@ -181,7 +181,7 @@ const kr = {
     },
     company: {
       eyebrow: "Company",
-      title: "투명한 데이터 운영 원칙으로 신뢰를 설계합니다.",
+      title: "투명한 데이터 운영 원칙으로\n신뢰를 설계합니다.",
       description:
         "우리는 정치적 판단을 대신하지 않습니다. 더 빠르고 검증 가능한 근거를 제공해 캠페인, 언론, 투자자가 같은 현실을 바라보도록 돕습니다.",
       keywordText:
@@ -201,8 +201,6 @@ const kr = {
     title: "회사 소개",
     paragraph1:
       "Casa Política Intelligence는 정치·공공 데이터를 분석하고 인사이트를 제공하는 플랫폼입니다.",
-    paragraph2:
-      "이 페이지는 회사 소개, 미션, 팀 정보 등을 담을 수 있습니다.",
   },
   contact: {
     title: "문의하기",

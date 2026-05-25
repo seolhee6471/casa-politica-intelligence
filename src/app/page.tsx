@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {
+  Children,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { imagePaths } from "@/assets/images";
 import { useLocaleMessage } from "@/i18n";
 import type { LocaleMessageKey } from "@/i18n";
@@ -209,12 +215,98 @@ function SectionHeading({
       <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
         {eyebrow}
       </p>
-      <h2 className="heading text-2xl text-brand-navy md:text-5xl">
+      <h2 className="heading whitespace-pre-line break-keep text-2xl text-brand-navy md:text-5xl">
         {title}
       </h2>
       <p className="mt-4 text-sm leading-7 text-slate-600 md:mt-5 md:text-base md:leading-8">
         {description}
       </p>
+    </div>
+  );
+}
+
+function MobileSnapSlider({
+  children,
+  className,
+  itemLabel,
+  tone = "light",
+}: {
+  children: ReactNode;
+  className: string;
+  itemLabel: string;
+  tone?: "light" | "dark";
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const items = Children.toArray(children);
+
+  function updateActiveIndex() {
+    const scroller = scrollerRef.current;
+
+    if (!scroller) {
+      return;
+    }
+
+    const childElements = Array.from(scroller.children) as HTMLElement[];
+    const scrollerCenter = scroller.scrollLeft + scroller.clientWidth / 2;
+
+    const nextIndex = childElements.reduce((closestIndex, child, index) => {
+      const currentChild = childElements[closestIndex];
+      const childCenter = child.offsetLeft + child.offsetWidth / 2;
+      const currentCenter =
+        currentChild.offsetLeft + currentChild.offsetWidth / 2;
+
+      return Math.abs(childCenter - scrollerCenter) <
+        Math.abs(currentCenter - scrollerCenter)
+        ? index
+        : closestIndex;
+    }, 0);
+
+    setActiveIndex(nextIndex);
+  }
+
+  function scrollToIndex(index: number) {
+    const target = scrollerRef.current?.children[index] as
+      | HTMLElement
+      | undefined;
+
+    target?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+
+  return (
+    <div>
+      <div
+        ref={scrollerRef}
+        onScroll={updateActiveIndex}
+        className={`no-scrollbar scroll-smooth ${className}`}
+      >
+        {items}
+      </div>
+      <div
+        className="mt-4 flex justify-center gap-2 md:hidden"
+        aria-label={`${itemLabel} slides`}
+      >
+        {items.map((_, index) => (
+          <button
+            key={`${itemLabel}-${index}`}
+            type="button"
+            onClick={() => scrollToIndex(index)}
+            className={`h-2 rounded-full transition-all ${
+              activeIndex === index
+                ? "w-6 bg-brand-gold"
+                : tone === "dark"
+                  ? "w-2 bg-white/30"
+                  : "w-2 bg-slate-300"
+            }`}
+            aria-label={`Go to ${itemLabel} ${index + 1}`}
+            aria-current={activeIndex === index ? "true" : undefined}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -407,7 +499,10 @@ export default function HomePage() {
           />
           <div className="relative">
             <div className="absolute left-[10%] right-[10%] top-10 hidden h-px bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent lg:block" />
-            <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5">
+            <MobileSnapSlider
+              itemLabel="solution step"
+              className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5"
+            >
               {architecture.map((item) => (
                 <article
                   key={item.titleKey}
@@ -446,10 +541,7 @@ export default function HomePage() {
                   <div className="relative mt-6 h-px w-12 bg-brand-gold/50 transition-all duration-300 group-hover:w-20 group-hover:bg-brand-gold" />
                 </article>
               ))}
-            </div>
-            <p className="mt-4 text-center text-xs text-slate-400 md:hidden">
-              Swipe to explore the process
-            </p>
+            </MobileSnapSlider>
           </div>
         </div>
       </section>
@@ -460,7 +552,10 @@ export default function HomePage() {
           title={t("home.technology.title")}
           description={t("home.technology.description")}
         />
-        <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
+        <MobileSnapSlider
+          itemLabel="technology card"
+          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4"
+        >
           {technologyCards.map((item) => (
             <article
               key={item.titleKey}
@@ -475,7 +570,7 @@ export default function HomePage() {
               </p>
             </article>
           ))}
-        </div>
+        </MobileSnapSlider>
       </section>
 
       <section className="bg-brand-navy px-4 py-14 text-white sm:px-6 md:py-24">
@@ -491,7 +586,11 @@ export default function HomePage() {
               {t("home.product.description")}
             </p>
           </div>
-          <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+          <MobileSnapSlider
+            itemLabel="product card"
+            tone="dark"
+            className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+          >
             {productCards.map((item) => (
               <article
                 key={item.titleKey}
@@ -508,7 +607,7 @@ export default function HomePage() {
                 </p>
               </article>
             ))}
-          </div>
+          </MobileSnapSlider>
         </div>
       </section>
 
@@ -518,7 +617,10 @@ export default function HomePage() {
           title={t("home.insight.title")}
           description={t("home.insight.description")}
         />
-        <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+        <MobileSnapSlider
+          itemLabel="insight card"
+          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+        >
           {insightCards.map((card) => (
             <article
               key={card.titleKey}
@@ -572,7 +674,7 @@ export default function HomePage() {
               </div>
             </article>
           ))}
-        </div>
+        </MobileSnapSlider>
       </section>
 
       <section className="px-4 pb-14 sm:px-6 md:pb-24" id="company">
@@ -581,7 +683,7 @@ export default function HomePage() {
             <p className="text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
               {t("home.company.eyebrow")}
             </p>
-            <h2 className="heading mt-5 text-2xl leading-tight sm:text-4xl md:text-5xl">
+            <h2 className="heading mt-5 whitespace-pre-line break-keep text-2xl leading-tight sm:text-4xl md:text-5xl">
               {t("home.company.title")}
             </h2>
             <p className="mt-5 text-sm leading-7 text-white/70 sm:mt-6 sm:text-base sm:leading-8">
