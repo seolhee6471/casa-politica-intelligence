@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev (Chrome)",
+      "type": "shell",
+      "command": "yarn",
+      "args": ["dev"],
+      "options": {
+        "env": {
+          "BROWSER": "chrome"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "nextjs",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "(Ready in|Local:)"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Open Chrome",
+      "type": "shell",
+      "command": "start",
+      "args": ["chrome", "http://localhost:3000"],
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "cmd.exe",
+            "args": ["/c"]
+          }
+        }
+      }
+    }
+  ]
+}

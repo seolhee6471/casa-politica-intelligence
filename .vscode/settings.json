@@ -1,0 +1,30 @@
+{
+  "terminal.integrated.env.windows": {
+    "BROWSER": "chrome",
+    "Path": "${workspaceFolder};${env:LOCALAPPDATA}\\corepack\\bin;${env:Path}"
+  },
+  "remote.autoForwardPorts": true,
+  "remote.portsAttributes": {
+    "3000": {
+      "label": "Next.js",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+      "path": "${env:windir}\\System32\\cmd.exe",
+      "args": ["/k", "cd /d \"${workspaceFolder}\""],
+      "icon": "terminal-cmd"
+    },
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "args": [
+        "-NoExit",
+        "-Command",
+        "function global:yarn { & \"$env:LOCALAPPDATA\\corepack\\bin\\yarn.cmd\" @args }; function global:yarnpkg { & \"$env:LOCALAPPDATA\\corepack\\bin\\yarnpkg.cmd\" @args }; Set-Location -LiteralPath '${workspaceFolder}'"
+      ]
+    }
+  }
+}
