@@ -8,7 +8,7 @@ export function ContactForm() {
 
   return (
     <form
-      className="flex max-w-md flex-col gap-4"
+      className="flex w-full max-w-md flex-col gap-4"
       onSubmit={(e) => {
         e.preventDefault();
       }}
@@ -37,9 +37,9 @@ export function ContactForm() {
         placeholder={$localeMessage("contact.form.message")}
         rows={5}
         required
-        className="rounded-lg border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-foreground dark:border-zinc-700"
+        className="min-h-32 rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-sm outline-none transition-colors focus:border-brand-navy"
       />
-      <Button type="submit">
+      <Button type="submit" className="w-full rounded-full py-3 sm:w-auto">
         {$localeMessage("contact.form.submit")}
       </Button>
     </form>

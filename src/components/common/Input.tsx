@@ -11,13 +11,13 @@ export function Input({ label, error, id, className = "", ...props }: InputProps
   return (
     <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={inputId} className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+        <label htmlFor={inputId} className="text-sm font-medium text-slate-700">
           {label}
         </label>
       )}
       <input
         id={inputId}
-        className={`rounded-lg border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none transition-colors focus:border-foreground dark:border-zinc-700 ${error ? "border-red-500" : ""} ${className}`}
+        className={`rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-sm outline-none transition-colors focus:border-brand-navy ${error ? "border-red-500" : ""} ${className}`}
         {...props}
       />
       {error && <p className="text-xs text-red-500">{error}</p>}

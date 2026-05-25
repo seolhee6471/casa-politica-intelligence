@@ -6,7 +6,7 @@ export function Footer() {
   const { $localeMessage } = useLocaleMessage();
 
   return (
-    <footer className="border-t border-slate-200 bg-brand-navy px-6 py-10 text-center text-sm text-white/70">
+    <footer className="border-t border-slate-200 bg-brand-navy px-4 py-8 text-center text-xs text-white/70 sm:px-6 sm:py-10 sm:text-sm">
       <span className="font-semibold text-white">
         {$localeMessage("common.siteName")}
       </span>{" "}

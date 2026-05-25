@@ -252,37 +252,37 @@ export default function HomePage() {
             )}
           </g>
         </svg>
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:py-32">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:py-32">
           <div>
-            <p className="mb-5 inline-flex rounded-full border border-brand-gold/30 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] text-brand-gold shadow-sm">
+            <p className="mb-4 inline-flex rounded-full border border-brand-gold/30 bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold shadow-sm sm:mb-5 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.28em]">
               {t("home.hero.eyebrow")}
             </p>
-            <h1 className="heading text-5xl font-extrabold leading-[1.03] text-brand-navy md:text-7xl">
+            <h1 className="heading text-4xl font-extrabold leading-[1.05] text-brand-navy sm:text-5xl md:text-7xl md:leading-[1.03]">
               {t("home.hero.headlineLine1")}
               <br />
               {t("home.hero.headlineLine2")}
             </h1>
-            <p className="mt-6 max-w-xl text-[16px] leading-8 text-[#4A5568] md:text-[17px]">
+            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#4A5568] sm:text-[16px] sm:leading-8 md:text-[17px]">
               {t("home.hero.description")}
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
               <Link
                 href="/main/contact"
-                className="inline-flex items-center justify-center rounded-full bg-brand-navy px-7 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74]"
+                className="inline-flex w-full items-center justify-center rounded-full bg-brand-navy px-7 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] sm:w-auto"
               >
                 {t("home.hero.primaryCta")}
               </Link>
               <Link
                 href="#solution"
-                className="inline-flex items-center justify-center rounded-full border border-brand-gold px-7 py-3 text-sm font-bold text-brand-navy transition hover:-translate-y-0.5 hover:bg-brand-gold/10"
+                className="inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-7 py-3 text-sm font-bold text-brand-navy transition hover:-translate-y-0.5 hover:bg-brand-gold/10 sm:w-auto"
               >
                 {t("home.hero.secondaryCta")}
               </Link>
             </div>
           </div>
 
-          <div className="pulse-dashboard group rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_24px_80px_rgba(0,31,92,0.10)]">
-            <div className="rounded-[1.5rem] bg-brand-navy p-6 text-white">
+          <div className="pulse-dashboard group rounded-[1.5rem] border border-slate-200 bg-white p-3 shadow-[0_24px_80px_rgba(0,31,92,0.10)] sm:rounded-[2rem] sm:p-5">
+            <div className="rounded-[1.25rem] bg-brand-navy p-4 text-white sm:rounded-[1.5rem] sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-white/50">
@@ -298,7 +298,7 @@ export default function HomePage() {
               </div>
               <svg
                 viewBox="0 0 420 180"
-                className="mt-8 h-48 w-full"
+                className="mt-6 h-36 w-full sm:mt-8 sm:h-48"
                 aria-hidden
               >
                 <defs>
@@ -334,7 +334,7 @@ export default function HomePage() {
                 {metrics.map((item) => (
                   <div
                     key={item.labelKey}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-transform duration-500 group-hover:-translate-y-1"
+                    className="rounded-2xl border border-white/10 bg-white/5 p-3 transition-transform duration-500 group-hover:-translate-y-1 sm:p-4"
                   >
                     <p className="text-xs text-white/55">
                       {t(item.labelKey)}
@@ -357,14 +357,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-24">
         <SectionHeading
           eyebrow={t("home.painGain.eyebrow")}
           title={t("home.painGain.title")}
           description={t("home.painGain.description")}
         />
-        <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
-          <div className="grid bg-slate-50 text-sm font-bold text-brand-navy md:grid-cols-[0.6fr_1fr_1fr]">
+        <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm sm:rounded-[2rem]">
+          <div className="hidden bg-slate-50 text-sm font-bold text-brand-navy md:grid md:grid-cols-[0.6fr_1fr_1fr]">
             <div className="border-b border-slate-200 p-5 md:border-b-0 md:border-r">
               {t("home.painGain.headers.criteria")}
             </div>
@@ -376,15 +376,21 @@ export default function HomePage() {
           {comparisons.map((item) => (
             <div
               key={item.labelKey}
-              className="grid border-t border-slate-100 text-sm md:grid-cols-[0.6fr_1fr_1fr]"
+              className="grid gap-3 border-t border-slate-100 p-4 text-sm md:grid-cols-[0.6fr_1fr_1fr] md:gap-0 md:p-0"
             >
-              <div className="bg-white p-5 font-bold text-brand-navy">
+              <div className="bg-white font-bold text-brand-navy md:p-5">
                 {t(item.labelKey)}
               </div>
-              <div className="p-5 text-slate-500 md:border-l">
+              <div className="rounded-xl bg-slate-50 p-4 text-slate-500 md:rounded-none md:border-l md:bg-white md:p-5">
+                <span className="mb-1 block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400 md:hidden">
+                  {t("home.painGain.headers.legacy")}
+                </span>
                 {t(item.legacyKey)}
               </div>
-              <div className="p-5 font-semibold text-brand-navy md:border-l">
+              <div className="rounded-xl bg-brand-navy/5 p-4 font-semibold text-brand-navy md:rounded-none md:border-l md:bg-white md:p-5">
+                <span className="mb-1 block text-[11px] font-bold uppercase tracking-[0.16em] text-brand-gold md:hidden">
+                  {t("home.painGain.headers.casa")}
+                </span>
                 {t(item.casaKey)}
               </div>
             </div>
@@ -392,7 +398,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="solution" className="bg-[#f7f8fb] px-6 py-16 md:py-24">
+      <section id="solution" className="bg-[#f7f8fb] px-4 py-14 sm:px-6 md:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow={t("home.solution.eyebrow")}
@@ -401,7 +407,7 @@ export default function HomePage() {
           />
           <div className="relative">
             <div className="absolute left-[10%] right-[10%] top-10 hidden h-px bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent lg:block" />
-            <div className="-mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-4 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5">
+            <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5">
               {architecture.map((item) => (
                 <article
                   key={item.titleKey}
@@ -448,13 +454,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-24">
         <SectionHeading
           eyebrow={t("home.technology.eyebrow")}
           title={t("home.technology.title")}
           description={t("home.technology.description")}
         />
-        <div className="-mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-4 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
+        <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
           {technologyCards.map((item) => (
             <article
               key={item.titleKey}
@@ -472,20 +478,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-brand-navy px-6 py-16 text-white md:py-24">
+      <section className="bg-brand-navy px-4 py-14 text-white sm:px-6 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
               {t("home.product.eyebrow")}
             </p>
-            <h2 className="heading text-3xl text-white md:text-5xl">
+            <h2 className="heading text-2xl text-white md:text-5xl">
               {t("home.product.title")}
             </h2>
-            <p className="mt-5 text-base leading-8 text-white/65">
+            <p className="mt-4 text-sm leading-7 text-white/65 md:mt-5 md:text-base md:leading-8">
               {t("home.product.description")}
             </p>
           </div>
-          <div className="-mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+          <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
             {productCards.map((item) => (
               <article
                 key={item.titleKey}
@@ -506,13 +512,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="insight" className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+      <section id="insight" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-24">
         <SectionHeading
           eyebrow={t("home.insight.eyebrow")}
           title={t("home.insight.title")}
           description={t("home.insight.description")}
         />
-        <div className="-mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+        <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
           {insightCards.map((card) => (
             <article
               key={card.titleKey}
@@ -569,23 +575,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 pb-16 md:pb-24" id="company">
-        <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] bg-brand-navy md:grid-cols-[0.9fr_1.1fr]">
-          <div className="p-10 text-white md:p-14">
+      <section className="px-4 pb-14 sm:px-6 md:pb-24" id="company">
+        <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[1.5rem] bg-brand-navy md:grid-cols-[0.9fr_1.1fr] md:rounded-[2rem]">
+          <div className="p-7 text-white sm:p-10 md:p-14">
             <p className="text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
               {t("home.company.eyebrow")}
             </p>
-            <h2 className="heading mt-5 text-4xl leading-tight md:text-5xl">
+            <h2 className="heading mt-5 text-2xl leading-tight sm:text-4xl md:text-5xl">
               {t("home.company.title")}
             </h2>
-            <p className="mt-6 leading-8 text-white/70">
+            <p className="mt-5 text-sm leading-7 text-white/70 sm:mt-6 sm:text-base sm:leading-8">
               {t("home.company.description")}
             </p>
           </div>
           <div className="grid gap-px bg-white/10 p-px md:grid-cols-2">
             {companyKeywords.map((keyword) => (
-              <div key={keyword} className="bg-brand-navy p-8">
-                <p className="heading text-3xl text-brand-gold">{keyword}</p>
+              <div key={keyword} className="bg-brand-navy p-6 sm:p-8">
+                <p className="heading text-2xl text-brand-gold sm:text-3xl">
+                  {keyword}
+                </p>
                 <p className="mt-4 text-sm leading-7 text-white/60">
                   {t("home.company.keywordText")}
                 </p>
@@ -595,7 +603,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-slate-100 bg-[#fbfbfd] px-6 py-24">
+      <section className="relative overflow-hidden border-t border-slate-100 bg-[#fbfbfd] px-4 py-16 sm:px-6 md:py-24">
         <div className="absolute left-1/2 top-0 h-px w-[min(70rem,90vw)] -translate-x-1/2 bg-gradient-to-r from-transparent via-brand-gold to-transparent" />
         <div className="absolute right-[-8rem] top-[-8rem] h-80 w-80 rounded-full bg-brand-gold/10 blur-3xl" />
         <div className="absolute bottom-0 left-[-10rem] h-72 w-72 rounded-full bg-brand-navy/5 blur-3xl" />
@@ -611,7 +619,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/main/contact"
-            className="inline-flex rounded-full bg-brand-navy px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] hover:shadow-brand-gold/20"
+            className="inline-flex w-full justify-center rounded-full bg-brand-navy px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] hover:shadow-brand-gold/20 sm:w-auto"
           >
             {t("home.cta.button")}
           </Link>

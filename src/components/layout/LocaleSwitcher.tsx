@@ -15,7 +15,7 @@ export function LocaleSwitcher() {
     <div
       role="group"
       aria-label="Language"
-      className="relative z-50 flex h-9 shrink-0 items-center gap-1 rounded-full border border-slate-200 bg-slate-50 p-1 font-sans text-[11px] font-semibold tracking-[0.04em] shadow-sm"
+      className="relative z-50 flex h-8 shrink-0 items-center gap-1 rounded-full border border-slate-200 bg-slate-50 p-1 font-sans text-[10px] font-semibold tracking-[0.04em] shadow-sm sm:h-9 sm:text-[11px]"
     >
       {options.map(({ value, label }) => (
         <button
@@ -26,7 +26,7 @@ export function LocaleSwitcher() {
             event.stopPropagation();
             setLocale(value);
           }}
-          className={`flex h-7 min-w-11 cursor-pointer items-center justify-center rounded-full px-3 transition-all ${
+          className={`flex h-6 min-w-9 cursor-pointer items-center justify-center rounded-full px-2.5 transition-all sm:h-7 sm:min-w-11 sm:px-3 ${
             locale === value
               ? "bg-brand-navy text-white shadow-sm"
               : "text-slate-500 hover:bg-white hover:text-brand-navy"
