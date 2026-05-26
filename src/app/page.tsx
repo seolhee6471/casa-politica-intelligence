@@ -367,7 +367,7 @@ export default function HomePage() {
 
   return (
     <main className="bg-white">
-      <section className="relative overflow-hidden border-b border-slate-100 bg-white">
+      <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden border-b border-slate-100 bg-white lg:min-h-[calc(100svh-5rem)]">
         <Image
           src={heroBackground}
           alt=""
@@ -378,7 +378,7 @@ export default function HomePage() {
           aria-hidden
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/70 to-white/5" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:py-32">
+        <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:py-24 lg:min-h-[calc(100svh-5rem)]">
           <div>
             <p className="mb-4 inline-flex rounded-full border border-brand-gold/30 bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold shadow-sm sm:mb-5 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.28em]">
               {t("home.hero.eyebrow")}
