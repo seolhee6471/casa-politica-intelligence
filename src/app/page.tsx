@@ -1,41 +1,18 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Children,
-  useEffect,
   useRef,
   useState,
   type ReactNode,
 } from "react";
+import heroBackground from "@/assets/images/background.png";
 import { useLocaleMessage } from "@/i18n";
 import type { LocaleMessageKey } from "@/i18n";
 import type { InsightChartVariant } from "@/components/charts/InsightHighchart";
-
-const metrics = [
-  {
-    labelKey: "home.dashboard.metrics.events",
-    value: 28.4,
-    suffix: "M",
-    decimals: 1,
-    change: "+12.8%",
-  },
-  {
-    labelKey: "home.dashboard.metrics.confidence",
-    value: 94.2,
-    suffix: "%",
-    decimals: 1,
-    change: "+4.1%",
-  },
-  {
-    labelKey: "home.dashboard.metrics.speed",
-    value: 3.7,
-    suffix: "s",
-    decimals: 1,
-    change: "-68%",
-  },
-] as const;
 
 const comparisons = [
   {
@@ -191,44 +168,6 @@ const companyKeywords = [
   },
 ] as const;
 
-function AnimatedNumber({
-  value,
-  suffix,
-  decimals,
-}: {
-  value: number;
-  suffix: string;
-  decimals: number;
-}) {
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    let frame = 0;
-    const totalFrames = 42;
-
-    function tick() {
-      frame += 1;
-      const progress = Math.min(frame / totalFrames, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCurrent(value * eased);
-
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      }
-    }
-
-    const id = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(id);
-  }, [value]);
-
-  return (
-    <>
-      {current.toFixed(decimals)}
-      {suffix}
-    </>
-  );
-}
-
 function SectionHeading({
   eyebrow,
   title,
@@ -236,19 +175,21 @@ function SectionHeading({
 }: {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
 }) {
   return (
     <div className="mx-auto mb-10 max-w-3xl text-center md:mb-12">
       <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
         {eyebrow}
       </p>
-      <h2 className="heading whitespace-pre-line break-keep text-2xl text-brand-navy md:text-5xl">
+      <h2 className="heading whitespace-pre-line break-keep text-2xl leading-tight text-brand-navy sm:text-3xl md:text-4xl">
         {title}
       </h2>
-      <p className="mt-4 text-sm leading-7 text-slate-600 md:mt-5 md:text-base md:leading-8">
-        {description}
-      </p>
+      {description ? (
+        <p className="mt-4 text-[15px] leading-7 text-slate-700 md:mt-5 md:text-base md:leading-8">
+          {description}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -347,141 +288,126 @@ function InsightVisual({
   return <InsightHighchart variant={variant as InsightChartVariant} />;
 }
 
+function HeroVisualSpace() {
+  return (
+    <div className="pointer-events-none relative hidden min-h-[24rem] md:block lg:min-h-[30rem]" aria-hidden>
+      <svg
+        viewBox="0 0 760 520"
+        className="absolute inset-y-0 right-[-5rem] h-full w-[125%] max-w-none overflow-visible"
+      >
+        <defs>
+          <filter id="heroOverlayGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <linearGradient id="heroOverlayInk" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#001F5C" stopOpacity="0.34" />
+            <stop offset="100%" stopColor="#001F5C" stopOpacity="0.1" />
+          </linearGradient>
+          <linearGradient id="heroOverlayGold" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#F2D17A" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#C9A44B" stopOpacity="0.32" />
+          </linearGradient>
+        </defs>
+
+        <g
+          fill="none"
+          stroke="url(#heroOverlayInk)"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          transform="translate(0 -86)"
+        >
+          <path d="M70 150 172 96 294 146 420 76 582 132 720 82" strokeWidth="1.05" />
+          <path d="M92 292 224 216 352 288 520 206 708 286" strokeWidth="1.05" />
+          <path d="M172 96 224 216 294 146 352 288 420 76 520 206 582 132" strokeWidth="0.95" />
+          <path d="M78 430 224 216 418 426 582 132 708 286" strokeWidth="0.7" strokeOpacity="0.35" />
+        </g>
+
+        <g transform="translate(0 -86)">
+          {[
+            [70, 150, 5],
+            [172, 96, 8],
+            [294, 146, 5],
+            [420, 76, 6],
+            [582, 132, 6],
+            [720, 82, 5],
+            [92, 292, 5],
+            [224, 216, 7],
+            [352, 288, 5],
+            [520, 206, 6],
+            [708, 286, 5],
+            [78, 430, 5],
+            [418, 426, 5],
+          ].map(([cx, cy, r], index) => (
+            <g key={`${cx}-${cy}`} filter={index % 2 === 0 ? "url(#heroOverlayGlow)" : undefined}>
+              <circle cx={cx} cy={cy} r={r + 5} fill="#C9A44B" opacity="0.1" />
+              <circle
+                className="particle-node"
+                cx={cx}
+                cy={cy}
+                r={r}
+                fill={index % 3 === 0 ? "url(#heroOverlayGold)" : "#F7E4A3"}
+                stroke="rgba(255,255,255,0.88)"
+                strokeWidth="2.2"
+              />
+            </g>
+          ))}
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 export default function HomePage() {
   const { $localeMessage } = useLocaleMessage();
   const t = (key: LocaleMessageKey) => $localeMessage(key);
 
   return (
     <main className="bg-white">
-      <section className="relative overflow-hidden border-b border-slate-100">
-        <div className="absolute inset-x-0 top-0 -z-0 h-80 bg-[radial-gradient(circle_at_top_right,rgba(201,164,75,0.18),transparent_35%),linear-gradient(180deg,#f8fafc,transparent)]" />
-        <svg
-          className="pointer-events-none absolute right-0 top-0 h-[32rem] w-[38rem] translate-x-8 opacity-[0.07]"
-          viewBox="0 0 640 520"
+      <section className="relative overflow-hidden border-b border-slate-100 bg-white">
+        <Image
+          src={heroBackground}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="pointer-events-none object-cover object-center"
           aria-hidden
-        >
-          <g fill="none" stroke="#001F5C" strokeWidth="1.4">
-            <path d="M72 92L172 148L282 82L392 178L548 112" />
-            <path d="M110 284L226 214L356 292L492 232" />
-            <path d="M172 148L226 214L282 82L356 292L392 178L492 232" />
-            <path d="M80 412L226 214L376 410L548 112" />
-          </g>
-          <g fill="#C9A44B">
-            {[72, 172, 282, 392, 548, 110, 226, 356, 492, 80, 376].map(
-              (cx, index) => (
-                <circle
-                  key={`${cx}-${index}`}
-                  className="particle-node origin-center"
-                  cx={cx}
-                  cy={[92, 148, 82, 178, 112, 284, 214, 292, 232, 412, 410][index]}
-                  r={index % 3 === 0 ? 6 : 4}
-                />
-              ),
-            )}
-          </g>
-        </svg>
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/70 to-white/5" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:py-32">
           <div>
             <p className="mb-4 inline-flex rounded-full border border-brand-gold/30 bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold shadow-sm sm:mb-5 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.28em]">
               {t("home.hero.eyebrow")}
             </p>
-            <h1 className="heading text-4xl font-extrabold leading-[1.05] text-brand-navy sm:text-5xl md:text-7xl md:leading-[1.03]">
+            <h1 className="heading text-4xl font-extrabold leading-[1.08] text-brand-navy sm:text-[2.75rem] md:text-5xl md:leading-[1.06]">
               {t("home.hero.headlineLine1")}
               <br />
               {t("home.hero.headlineLine2")}
             </h1>
-            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#4A5568] sm:text-[16px] sm:leading-8 md:text-[17px]">
+            <p className="mt-5 max-w-xl text-base leading-8 text-slate-700 md:text-[17px]">
               {t("home.hero.description")}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
               <Link
                 href="/main/contact"
-                className="inline-flex w-full items-center justify-center rounded-full bg-brand-navy px-7 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] sm:w-auto"
+                className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-brand-navy px-7 py-3.5 text-[15px] font-bold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] sm:w-auto"
               >
                 {t("home.hero.primaryCta")}
               </Link>
               <Link
                 href="#solution"
-                className="inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-7 py-3 text-sm font-bold text-brand-navy transition hover:-translate-y-0.5 hover:bg-brand-gold/10 sm:w-auto"
+                className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-brand-gold px-7 py-3.5 text-[15px] font-bold text-brand-navy transition hover:-translate-y-0.5 hover:bg-brand-gold/10 sm:w-auto"
               >
                 {t("home.hero.secondaryCta")}
               </Link>
             </div>
           </div>
 
-          <div className="pulse-dashboard group">
-            <div className="rounded-[1.5rem] bg-brand-navy p-4 text-white sm:rounded-[2rem] sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-white/50">
-                    {t("home.dashboard.eyebrow")}
-                  </p>
-                  <h2 className="heading mt-2 text-2xl">
-                    {t("home.dashboard.title")}
-                  </h2>
-                </div>
-                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-200">
-                  {t("home.dashboard.status")}
-                </span>
-              </div>
-              <svg
-                viewBox="0 0 420 180"
-                className="mt-6 h-36 w-full sm:mt-8 sm:h-48"
-                aria-hidden
-              >
-                <defs>
-                  <linearGradient id="lineFill" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#C9A44B" stopOpacity="0.28" />
-                    <stop offset="100%" stopColor="#C9A44B" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M0 150 C65 120 80 82 136 98 C190 114 210 42 270 58 C330 74 345 22 420 34 L420 180 L0 180 Z"
-                  fill="url(#lineFill)"
-                />
-                <path
-                  className="data-line transition-transform duration-500 group-hover:-translate-y-1"
-                  d="M0 150 C65 120 80 82 136 98 C190 114 210 42 270 58 C330 74 345 22 420 34"
-                  stroke="#C9A44B"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  fill="none"
-                />
-                {[0, 70, 140, 210, 280, 350, 420].map((x) => (
-                  <line
-                    key={x}
-                    x1={x}
-                    x2={x}
-                    y1="10"
-                    y2="170"
-                    stroke="rgba(255,255,255,0.08)"
-                  />
-                ))}
-              </svg>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {metrics.map((item) => (
-                  <div
-                    key={item.labelKey}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-3 transition-transform duration-500 group-hover:-translate-y-1 sm:p-4"
-                  >
-                    <p className="text-xs text-white/55">
-                      {t(item.labelKey)}
-                    </p>
-                    <p className="data-number mt-2 text-2xl">
-                      <AnimatedNumber
-                        value={item.value}
-                        suffix={item.suffix}
-                        decimals={item.decimals}
-                      />
-                    </p>
-                    <p className="mt-1 text-xs text-brand-gold">
-                      {item.change}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <HeroVisualSpace />
         </div>
       </section>
 
@@ -491,7 +417,7 @@ export default function HomePage() {
           title={t("home.painGain.title")}
           description={t("home.painGain.description")}
         />
-        <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm sm:rounded-[2rem]">
+        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
           <div className="hidden bg-slate-50 text-sm font-bold text-brand-navy md:grid md:grid-cols-[0.6fr_1fr_1fr]">
             <div className="border-b border-slate-200 p-5 md:border-b-0 md:border-r">
               {t("home.painGain.headers.criteria")}
@@ -531,7 +457,6 @@ export default function HomePage() {
           <SectionHeading
             eyebrow={t("home.solution.eyebrow")}
             title={t("home.solution.title")}
-            description={t("home.solution.description")}
           />
           <div className="relative">
             <div className="absolute left-[10%] right-[10%] top-10 hidden h-px bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent lg:block" />
@@ -543,7 +468,7 @@ export default function HomePage() {
                 <article
                   key={item.titleKey}
                   tabIndex={0}
-                  className="group relative min-w-[74vw] snap-start overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm outline-none transition hover:-translate-y-[5px] hover:border-brand-gold/40 hover:shadow-xl hover:shadow-blue-950/5 focus-visible:ring-2 focus-visible:ring-brand-gold/50 md:min-w-0 md:rounded-[1.75rem] md:p-6"
+                  className="group relative min-w-[74vw] snap-start overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm outline-none transition hover:-translate-y-[5px] hover:border-brand-gold/40 hover:shadow-xl hover:shadow-blue-950/5 focus-visible:ring-2 focus-visible:ring-brand-gold/50 md:min-w-0 md:p-6"
                 >
                   <svg
                     className="pointer-events-none absolute -right-10 top-7 h-36 w-44 opacity-[0.06]"
@@ -595,7 +520,7 @@ export default function HomePage() {
           {technologyCards.map((item) => (
             <article
               key={item.titleKey}
-              className="min-w-[78vw] snap-start rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:min-w-0 md:p-7"
+              className="min-w-[78vw] snap-start rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:min-w-0 md:p-7"
             >
               <div className="mb-6 h-1 w-10 rounded-full bg-brand-gold" />
               <h3 className="heading text-xl text-brand-navy">
@@ -615,10 +540,10 @@ export default function HomePage() {
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
               {t("home.product.eyebrow")}
             </p>
-            <h2 className="heading text-2xl text-white md:text-5xl">
+            <h2 className="heading text-2xl leading-tight text-white sm:text-3xl md:text-4xl">
               {t("home.product.title")}
             </h2>
-            <p className="mt-4 text-sm leading-7 text-white/65 md:mt-5 md:text-base md:leading-8">
+            <p className="mt-4 text-[15px] leading-7 text-white/75 md:mt-5 md:text-base md:leading-8">
               {t("home.product.description")}
             </p>
           </div>
@@ -630,12 +555,12 @@ export default function HomePage() {
             {productCards.map((item) => (
               <article
                 key={item.titleKey}
-                className="min-w-[78vw] snap-start rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-[5px] hover:bg-white/[0.07] md:min-w-0 md:rounded-[1.75rem] md:p-8"
+                className="min-w-[78vw] snap-start rounded-xl border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-[5px] hover:bg-white/[0.07] md:min-w-0 md:p-8"
               >
                 <p className="mb-6 text-xs font-bold uppercase tracking-[0.24em] text-brand-gold">
                   {t(item.audienceKey)}
                 </p>
-                <h3 className="heading text-2xl text-white">
+                <h3 className="heading text-xl text-white">
                   {t(item.titleKey)}
                 </h3>
                 <p className="mt-5 leading-7 text-white/65">
@@ -660,7 +585,7 @@ export default function HomePage() {
           {insightCards.map((card) => (
             <article
               key={card.titleKey}
-              className="group min-w-[82vw] snap-start overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:min-w-0 md:rounded-[1.75rem]"
+              className="group min-w-[82vw] snap-start overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:min-w-0"
             >
               <div className="relative isolate h-40 overflow-hidden bg-brand-navy">
                 <div className="absolute inset-0 transition duration-700 group-hover:scale-[1.02] group-hover:saturate-110">
@@ -694,12 +619,12 @@ export default function HomePage() {
       </section>
 
       <section className="px-4 pb-14 sm:px-6 md:pb-24" id="company">
-        <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[1.5rem] bg-brand-navy md:grid-cols-[0.9fr_1.1fr] md:rounded-[2rem]">
+        <div className="mx-auto grid max-w-7xl overflow-hidden rounded-xl bg-brand-navy md:grid-cols-[0.9fr_1.1fr]">
           <div className="p-7 text-white sm:p-10 md:p-14">
             <p className="text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
               {t("home.company.eyebrow")}
             </p>
-            <h2 className="heading mt-5 whitespace-pre-line break-keep text-2xl leading-tight sm:text-4xl md:text-5xl">
+            <h2 className="heading mt-5 whitespace-pre-line break-keep text-2xl leading-tight sm:text-3xl md:text-4xl">
               {t("home.company.title")}
             </h2>
             <p className="mt-5 text-sm leading-7 text-white/70 sm:mt-6 sm:text-base sm:leading-8">
@@ -709,7 +634,7 @@ export default function HomePage() {
           <div className="grid gap-px bg-white/10 p-px md:grid-cols-2">
             {companyKeywords.map((keyword) => (
               <div key={keyword.label} className="bg-brand-navy p-6 sm:p-8">
-                <p className="heading text-2xl text-brand-gold sm:text-3xl">
+                <p className="heading text-xl text-brand-gold sm:text-2xl">
                   {keyword.label}
                 </p>
                 <p className="mt-4 text-sm leading-7 text-white/60">
@@ -737,7 +662,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/main/contact"
-            className="inline-flex w-full justify-center rounded-full bg-brand-navy px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] hover:shadow-brand-gold/20 sm:w-auto"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-brand-navy px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] hover:shadow-brand-gold/20 sm:w-auto"
           >
             {t("home.cta.button")}
           </Link>
