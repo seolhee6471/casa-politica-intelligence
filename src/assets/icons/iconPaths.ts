@@ -5,7 +5,7 @@ export const iconPaths = {
   next: "/icons/next.svg",
   vercel: "/icons/vercel.svg",
   window: "/icons/window.svg",
-  logo_navbar: "/icons/logo_nav2.png",
+  logo_navbar: "/icons/logo3.png",
 } as const;
 
 export type IconPath = (typeof iconPaths)[keyof typeof iconPaths];

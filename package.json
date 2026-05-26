@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 192.168.75.72 -p 3000",
+    "dev": "next dev -H 192.168.75.163 -p 3000",
     "dev:chrome": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev-chrome.ps1",
     "build": "next build",
     "start": "next start",

@@ -42,7 +42,7 @@ const geistMono = Geist_Mono({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://casa-politica-intelligence.vercel.app";
-const sharedImage = "/images/casa.jpg";
+const sharedImage = "/images/casapolitica.jpg";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

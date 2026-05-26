@@ -19,19 +19,13 @@ export function AboutSection() {
         <div className="relative mx-auto w-full max-w-md lg:mx-0">
           <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] sm:min-h-[25rem]">
             <Image
-              src="/images/casa.jpg"
+              src="/images/casapolitica.jpg"
               alt="Casa Politica Intelligence"
               fill
               sizes="(min-width: 1024px) 420px, (min-width: 640px) 448px, 100vw"
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/45 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
-                Casa Politica Intelligence
-              </p>
-            </div>
           </div>
         </div>
 

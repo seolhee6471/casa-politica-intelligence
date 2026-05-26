@@ -5,7 +5,7 @@ type LogoNavbarProps = {
   className?: string;
 };
 
-/** Navbar logo — `public/icons/logo_nav2.PNG` 파일 사용 */
+/** Navbar logo — `public/icons/logo3.PNG` 파일 사용 */
 export function LogoNavbar({ className }: LogoNavbarProps) {
   return (
     <Image
