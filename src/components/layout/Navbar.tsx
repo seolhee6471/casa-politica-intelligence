@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     <div className="flex items-center gap-2">
-      <nav className="hidden items-center gap-2 font-sans text-[15px] font-medium tracking-[-0.01em] lg:flex">
+      <nav className="hidden items-center gap-2 font-sans text-base font-medium tracking-[-0.01em] lg:flex">
         {navItems.map(({ href, messageKey }) => (
           <Link
             key={href}
