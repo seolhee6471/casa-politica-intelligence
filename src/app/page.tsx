@@ -4,8 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { Children, useRef, useState, type ReactNode } from "react";
-import heroBackground from "@/assets/images/background.png";
-import { MobileReveal } from "@/components/ui/MobileReveal";
+import heroBackground from "@/assets/images/background.jpg";
 import { useLocaleMessage } from "@/i18n";
 import type { LocaleMessageKey } from "@/i18n";
 import type { InsightChartVariant } from "@/components/charts/InsightHighchart";
@@ -399,7 +398,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_62%,rgba(201,164,75,0.22),transparent_45%)]" />
         </div>
         <div className="relative mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl items-center gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-16 md:grid-cols-[1.16fr_0.84fr] md:gap-14 md:py-24 lg:min-h-[calc(100dvh-5rem)] lg:grid-cols-[1.24fr_0.76fr] xl:grid-cols-[1.3fr_0.7fr]">
-          <MobileReveal className="relative z-10 lg:max-w-none">
+          <div className="relative z-10 lg:max-w-none">
             <p className="mb-4 inline-flex rounded-full border border-brand-gold/30 bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold shadow-sm sm:mb-5 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.28em]">
               {t("home.hero.eyebrow")}
             </p>
@@ -426,22 +425,19 @@ export default function HomePage() {
                 {t("home.hero.secondaryCta")}
               </button>
             </div>
-          </MobileReveal>
+          </div>
 
           <HeroVisualSpace />
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-[clamp(3.5rem,8vw,6.5rem)] sm:px-6">
-        <MobileReveal>
-          <SectionHeading
-            eyebrow={t("home.painGain.eyebrow")}
-            title={t("home.painGain.title")}
-            description={t("home.painGain.description")}
-          />
-        </MobileReveal>
-        <MobileReveal delayMs={80}>
-          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <SectionHeading
+          eyebrow={t("home.painGain.eyebrow")}
+          title={t("home.painGain.title")}
+          description={t("home.painGain.description")}
+        />
+        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
           <div className="hidden bg-slate-50 text-sm font-bold text-brand-navy md:grid md:grid-cols-[0.6fr_1fr_1fr]">
             <div className="border-b border-slate-200 p-5 md:border-b-0 md:border-r">
               {t("home.painGain.headers.criteria")}
@@ -473,8 +469,7 @@ export default function HomePage() {
               </div>
             </div>
           ))}
-          </div>
-        </MobileReveal>
+        </div>
       </section>
 
       <section
@@ -482,27 +477,21 @@ export default function HomePage() {
         className="bg-[#f7f8fb] px-4 py-[clamp(3.5rem,8vw,6.5rem)] sm:px-6"
       >
         <div className="mx-auto max-w-7xl">
-          <MobileReveal>
-            <SectionHeading
-              eyebrow={t("home.solution.eyebrow")}
-              title={t("home.solution.title")}
-            />
-          </MobileReveal>
+          <SectionHeading
+            eyebrow={t("home.solution.eyebrow")}
+            title={t("home.solution.title")}
+          />
           <div className="relative">
             <div className="absolute left-[10%] right-[10%] top-10 hidden h-px bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent lg:block" />
             <MobileSnapSlider
               itemLabel="solution step"
               className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5"
             >
-              {architecture.map((item, index) => (
-                <MobileReveal
-                  key={item.titleKey}
-                  delayMs={index * 90}
-                  className="min-w-[84vw] snap-start md:min-w-0"
-                >
+              {architecture.map((item) => (
                 <article
+                  key={item.titleKey}
                   tabIndex={0}
-                  className="group relative h-full overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm outline-none transition hover:-translate-y-[5px] hover:border-brand-gold/40 hover:shadow-xl hover:shadow-blue-950/5 focus-visible:ring-2 focus-visible:ring-brand-gold/50 md:p-6"
+                  className="group relative min-w-[84vw] snap-start overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm outline-none transition hover:-translate-y-[5px] hover:border-brand-gold/40 hover:shadow-xl hover:shadow-blue-950/5 focus-visible:ring-2 focus-visible:ring-brand-gold/50 md:min-w-0 md:p-6"
                 >
                   <svg
                     className="pointer-events-none absolute -right-10 top-7 h-36 w-44 opacity-[0.06]"
@@ -535,7 +524,6 @@ export default function HomePage() {
                   </p>
                   <div className="relative mt-6 h-px w-12 bg-brand-gold/50 transition-all duration-300 group-hover:w-20 group-hover:bg-brand-gold" />
                 </article>
-                </MobileReveal>
               ))}
             </MobileSnapSlider>
           </div>
@@ -543,25 +531,19 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-[clamp(3.5rem,8vw,6.5rem)] sm:px-6">
-        <MobileReveal>
-          <SectionHeading
-            eyebrow={t("home.technology.eyebrow")}
-            title={t("home.technology.title")}
-            description={t("home.technology.description")}
-          />
-        </MobileReveal>
+        <SectionHeading
+          eyebrow={t("home.technology.eyebrow")}
+          title={t("home.technology.title")}
+          description={t("home.technology.description")}
+        />
         <MobileSnapSlider
           itemLabel="technology card"
           className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4"
         >
-          {technologyCards.map((item, index) => (
-            <MobileReveal
-              key={item.titleKey}
-              delayMs={index * 90}
-              className="min-w-[86vw] snap-start md:min-w-0"
-            >
+          {technologyCards.map((item) => (
             <article
-              className="h-full rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:p-7"
+              key={item.titleKey}
+              className="min-w-[86vw] snap-start rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:min-w-0 md:p-7"
             >
               <div className="mb-6 h-1 w-10 rounded-full bg-brand-gold" />
               <h3 className="heading text-xl text-brand-navy">
@@ -571,14 +553,13 @@ export default function HomePage() {
                 {t(item.textKey)}
               </p>
             </article>
-            </MobileReveal>
           ))}
         </MobileSnapSlider>
       </section>
 
       <section className="bg-brand-navy px-4 py-[clamp(3.5rem,8vw,6.5rem)] text-white sm:px-6">
         <div className="mx-auto max-w-7xl">
-          <MobileReveal className="mx-auto mb-12 max-w-3xl text-center">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
               {t("home.product.eyebrow")}
             </p>
@@ -588,20 +569,16 @@ export default function HomePage() {
             <p className="mt-4 text-[15px] leading-7 text-white/75 md:mt-5 md:text-base md:leading-8">
               {t("home.product.description")}
             </p>
-          </MobileReveal>
+          </div>
           <MobileSnapSlider
             itemLabel="product card"
             tone="dark"
             className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
           >
-            {productCards.map((item, index) => (
-              <MobileReveal
-                key={item.titleKey}
-                delayMs={index * 90}
-                className="min-w-[86vw] snap-start md:min-w-0"
-              >
+            {productCards.map((item) => (
               <article
-                className="h-full rounded-xl border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-[5px] hover:bg-white/[0.07] md:p-8"
+                key={item.titleKey}
+                className="min-w-[86vw] snap-start rounded-xl border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-[5px] hover:bg-white/[0.07] md:min-w-0 md:p-8"
               >
                 <p className="mb-6 text-xs font-bold uppercase tracking-[0.24em] text-brand-gold">
                   {t(item.audienceKey)}
@@ -613,7 +590,6 @@ export default function HomePage() {
                   {t(item.textKey)}
                 </p>
               </article>
-              </MobileReveal>
             ))}
           </MobileSnapSlider>
         </div>
@@ -623,26 +599,19 @@ export default function HomePage() {
         id="insight"
         className="mx-auto max-w-7xl px-4 py-[clamp(3.5rem,8vw,6.5rem)] sm:px-6"
       >
-        <MobileReveal>
-          <SectionHeading
-            eyebrow={t("home.insight.eyebrow")}
-            title={t("home.insight.title")}
-            description={t("home.insight.description")}
-          />
-        </MobileReveal>
+        <SectionHeading
+          eyebrow={t("home.insight.eyebrow")}
+          title={t("home.insight.title")}
+          description={t("home.insight.description")}
+        />
         <MobileSnapSlider
           itemLabel="insight card"
           className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
         >
-          {insightCards.map((card, index) => (
-            <MobileReveal
-              key={card.titleKey}
-              delayMs={index * 90}
-              variant="zoom-in"
-              className="min-w-[88vw] snap-start md:min-w-0"
-            >
+          {insightCards.map((card) => (
             <article
-              className="group h-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5"
+              key={card.titleKey}
+              className="group min-w-[88vw] snap-start overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-[5px] hover:shadow-xl hover:shadow-blue-950/5 md:min-w-0"
             >
               <div className="relative isolate h-40 overflow-hidden bg-brand-navy">
                 <div className="absolute inset-0 transition duration-700 group-hover:scale-[1.02] group-hover:saturate-110">
@@ -671,7 +640,6 @@ export default function HomePage() {
                 </div>
               </div>
             </article>
-            </MobileReveal>
           ))}
         </MobileSnapSlider>
       </section>
@@ -680,7 +648,6 @@ export default function HomePage() {
         className="px-4 py-[clamp(3.5rem,8vw,6.5rem)] sm:px-6"
         id="company"
       >
-        <MobileReveal variant="fade-in">
         <div className="mx-auto grid max-w-7xl overflow-hidden rounded-xl bg-brand-navy md:grid-cols-[0.9fr_1.1fr]">
           <div className="p-7 text-white sm:p-10 md:p-14">
             <p className="text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
@@ -706,7 +673,6 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-        </MobileReveal>
       </section>
 
       <section className="relative overflow-hidden border-t border-slate-100 bg-[#fbfbfd] px-4 py-[clamp(3.5rem,8vw,6.5rem)] sm:px-6">
@@ -714,7 +680,7 @@ export default function HomePage() {
         <div className="absolute right-[-8rem] top-[-8rem] h-80 w-80 rounded-full bg-brand-gold/10 blur-3xl" />
         <div className="absolute bottom-0 left-[-10rem] h-72 w-72 rounded-full bg-brand-navy/5 blur-3xl" />
         <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-          <MobileReveal className="max-w-2xl">
+          <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
               {t("home.cta.eyebrow")}
             </p>
@@ -722,15 +688,13 @@ export default function HomePage() {
               {t("home.cta.title")}
             </h2>
             <div className="mt-6 h-px w-20 bg-brand-gold" />
-          </MobileReveal>
-          <MobileReveal delayMs={100} className="w-full md:w-auto">
+          </div>
           <Link
             href="/main/contact"
             className="inline-flex h-12 w-full items-center justify-center whitespace-nowrap rounded-full bg-brand-navy px-8 text-[15px] font-bold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5 hover:bg-[#052a74] hover:shadow-brand-gold/20 sm:w-auto"
           >
             {t("home.cta.button")}
           </Link>
-          </MobileReveal>
         </div>
       </section>
     </main>

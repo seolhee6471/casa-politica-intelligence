@@ -5,6 +5,7 @@ const kr = {
     brand: "Casa Politica Intelligence",
     description: "Casa Politica Intelligence",
     rights: "All rights reserved.",
+    scrollToTop: "맨 위로",
   },
   nav: {
     home: "홈",

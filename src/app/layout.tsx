@@ -6,7 +6,7 @@ import {
   Nanum_Myeongjo,
 } from "next/font/google";
 import { Providers } from "@/app/providers";
-import { Footer, Header } from "@/components/layout";
+import { Footer, Header, ScrollToTopButton } from "@/components/layout";
 import "@fontsource/pretendard/400.css";
 import "@fontsource/pretendard/500.css";
 import "@fontsource/pretendard/600.css";
@@ -94,6 +94,7 @@ export default function RootLayout({
           <Header />
           <div className="flex-1">{children}</div>
           <Footer />
+          <ScrollToTopButton />
         </Providers>
       </body>
     </html>

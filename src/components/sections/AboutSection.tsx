@@ -1,6 +1,5 @@
 "use client";
 
-import { MobileReveal } from "@/components/ui/MobileReveal";
 import { useLocaleMessage } from "@/i18n";
 import Image from "next/image";
 
@@ -17,7 +16,7 @@ export function AboutSection() {
   return (
     <section className="mx-auto max-w-6xl">
       <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
-        <MobileReveal variant="zoom-in" className="relative mx-auto w-full max-w-md lg:mx-0">
+        <div className="relative mx-auto w-full max-w-md lg:mx-0">
           <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] sm:min-h-[25rem]">
             <Image
               src="/images/casapolitica.jpg"
@@ -28,9 +27,9 @@ export function AboutSection() {
               priority
             />
           </div>
-        </MobileReveal>
+        </div>
 
-        <MobileReveal delayMs={100} className="max-w-2xl">
+        <div className="max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-[0.32em] text-brand-gold">
             {$localeMessage("about.eyebrow")}
           </p>
@@ -57,7 +56,7 @@ export function AboutSection() {
               </div>
             ))}
           </div>
-        </MobileReveal>
+        </div>
       </div>
     </section>
   );

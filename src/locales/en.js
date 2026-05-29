@@ -4,6 +4,7 @@ const en = {
     brand: "Casa Politica Intelligence",
     description: "Casa Politica Intelligence",
     rights: "All rights reserved.",
+    scrollToTop: "Scroll to top",
   },
   nav: {
     home: "Home",
