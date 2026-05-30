@@ -7,6 +7,7 @@ import { Children, useRef, useState, type ReactNode } from "react";
 import heroBackground from "@/assets/images/background.jpg";
 import { useLocaleMessage } from "@/i18n";
 import type { LocaleMessageKey } from "@/i18n";
+import { scrollElementIntoView } from "@/lib/scroll";
 import type { InsightChartVariant } from "@/components/charts/InsightHighchart";
 
 const comparisons = [
@@ -234,11 +235,9 @@ function MobileSnapSlider({
       | HTMLElement
       | undefined;
 
-    target?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
-    });
+    if (target) {
+      scrollElementIntoView(target, { block: "nearest", inline: "center" });
+    }
   }
 
   return (
@@ -246,7 +245,7 @@ function MobileSnapSlider({
       <div
         ref={scrollerRef}
         onScroll={updateActiveIndex}
-        className={`no-scrollbar scroll-smooth ${className}`}
+        className={`mobile-scroll-rail no-scrollbar md:scroll-smooth ${className}`}
       >
         {items}
       </div>
@@ -366,7 +365,7 @@ export default function HomePage() {
   const scrollToSolution = () => {
     const target = document.getElementById("solution");
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollElementIntoView(target, { block: "start" });
       window.history.replaceState(null, "", "#solution");
       return;
     }
@@ -485,7 +484,7 @@ export default function HomePage() {
             <div className="absolute left-[10%] right-[10%] top-10 hidden h-px bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent lg:block" />
             <MobileSnapSlider
               itemLabel="solution step"
-              className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5"
+              className="-mx-4 flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5"
             >
               {architecture.map((item) => (
                 <article
@@ -538,7 +537,7 @@ export default function HomePage() {
         />
         <MobileSnapSlider
           itemLabel="technology card"
-          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4"
+          className="-mx-4 flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4"
         >
           {technologyCards.map((item) => (
             <article
@@ -573,7 +572,7 @@ export default function HomePage() {
           <MobileSnapSlider
             itemLabel="product card"
             tone="dark"
-            className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+            className="-mx-4 flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
           >
             {productCards.map((item) => (
               <article
@@ -606,7 +605,7 @@ export default function HomePage() {
         />
         <MobileSnapSlider
           itemLabel="insight card"
-          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+          className="-mx-4 flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
         >
           {insightCards.map((card) => (
             <article

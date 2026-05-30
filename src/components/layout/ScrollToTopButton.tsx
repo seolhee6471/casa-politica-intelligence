@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocaleMessage } from "@/i18n";
+import { scrollWindowTo } from "@/lib/scroll";
 
 const SCROLL_THRESHOLD = 420;
 
@@ -10,9 +11,19 @@ export function ScrollToTopButton() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const onScroll = () => {
-      const next = window.scrollY > SCROLL_THRESHOLD;
-      setVisible((prev) => (prev === next ? prev : next));
+      if (ticking) {
+        return;
+      }
+
+      ticking = true;
+      requestAnimationFrame(() => {
+        const next = window.scrollY > SCROLL_THRESHOLD;
+        setVisible((prev) => (prev === next ? prev : next));
+        ticking = false;
+      });
     };
 
     onScroll();
@@ -21,7 +32,7 @@ export function ScrollToTopButton() {
   }, []);
 
   function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollWindowTo(0);
   }
 
   return (
@@ -29,7 +40,7 @@ export function ScrollToTopButton() {
       type="button"
       onClick={scrollToTop}
       aria-label={$localeMessage("common.scrollToTop")}
-      className={`group fixed bottom-6 right-4 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-slate-200/90 bg-white/95 shadow-[0_4px_20px_rgba(0,31,92,0.08)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-gold/45 hover:bg-white hover:shadow-[0_8px_28px_rgba(0,31,92,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/40 active:translate-y-0 sm:bottom-8 sm:right-6 sm:h-12 sm:w-12 motion-reduce:transition-none ${
+      className={`group fixed bottom-6 right-4 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-slate-200/90 bg-white shadow-[0_4px_20px_rgba(0,31,92,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-gold/45 hover:bg-white hover:shadow-[0_8px_28px_rgba(0,31,92,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/40 active:translate-y-0 sm:bottom-8 sm:right-6 sm:h-12 sm:w-12 motion-reduce:transition-none ${
         visible
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-2 opacity-0"

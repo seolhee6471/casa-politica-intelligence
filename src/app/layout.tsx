@@ -87,7 +87,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${ebGaramond.variable} ${nanumMyeongjo.variable} ${inter.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${ebGaramond.variable} ${nanumMyeongjo.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Providers>
