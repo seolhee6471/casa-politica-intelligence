@@ -3,10 +3,14 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { Children, useRef, useState, type ReactNode } from "react";
+import { Children, useEffect, useRef, useState, type ReactNode } from "react";
 import heroBackground from "@/assets/images/background.jpg";
 import { useLocaleMessage } from "@/i18n";
 import type { LocaleMessageKey } from "@/i18n";
+import {
+  clearMobileHeroViewport,
+  lockMobileHeroViewport,
+} from "@/lib/heroViewport";
 import { scrollElementIntoView } from "@/lib/scroll";
 import type { InsightChartVariant } from "@/components/charts/InsightHighchart";
 
@@ -362,6 +366,17 @@ function HeroVisualSpace() {
 export default function HomePage() {
   const { $localeMessage } = useLocaleMessage();
   const t = (key: LocaleMessageKey) => $localeMessage(key);
+
+  useEffect(() => {
+    lockMobileHeroViewport();
+    window.addEventListener("orientationchange", lockMobileHeroViewport);
+
+    return () => {
+      window.removeEventListener("orientationchange", lockMobileHeroViewport);
+      clearMobileHeroViewport();
+    };
+  }, []);
+
   const scrollToSolution = () => {
     const target = document.getElementById("solution");
     if (target) {
@@ -374,7 +389,7 @@ export default function HomePage() {
 
   return (
     <main className="bg-white">
-      <section className="relative max-lg:min-h-[calc(100svh-4rem+2.5rem)] overflow-hidden border-b border-slate-100 bg-white lg:min-h-[calc(100dvh-5.25rem)]">
+      <section className="relative max-lg:min-h-[var(--hero-mobile-section-min,calc(100svh-4rem+2.5rem))] overflow-hidden border-b border-slate-100 bg-white lg:min-h-[calc(100dvh-5.25rem)]">
         <Image
           src={heroBackground}
           alt=""
@@ -396,7 +411,7 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_62%,rgba(201,164,75,0.22),transparent_45%)]" />
         </div>
-        <div className="relative mx-auto grid max-lg:min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-16 md:grid-cols-[1.16fr_0.84fr] md:gap-14 md:py-24 lg:min-h-[calc(100dvh-5.25rem)] lg:grid-cols-[1.24fr_0.76fr] xl:grid-cols-[1.3fr_0.7fr]">
+        <div className="relative mx-auto grid max-lg:min-h-[var(--hero-mobile-content-min,calc(100svh-4rem))] max-w-7xl items-center gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-16 md:grid-cols-[1.16fr_0.84fr] md:gap-14 md:py-24 lg:min-h-[calc(100dvh-5.25rem)] lg:grid-cols-[1.24fr_0.76fr] xl:grid-cols-[1.3fr_0.7fr]">
           <div className="relative z-10 lg:max-w-none">
             <p className="mb-4 inline-flex rounded-full border border-brand-gold/30 bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold shadow-sm sm:mb-5 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.28em]">
               {t("home.hero.eyebrow")}
